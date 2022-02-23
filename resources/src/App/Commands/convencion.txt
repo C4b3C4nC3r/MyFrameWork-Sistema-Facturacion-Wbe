@@ -1,0 +1,34 @@
+<?php
+namespace Console\App\Commands;
+ 
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
+ 
+class HelloworldCommand extends Command
+{
+    protected function configure()
+    {
+        $this->setName(NOMBRE DEL COMANDO STRING)
+            ->setDescription(DESCRIPCCION DEL COMANDO STRIN)
+            ->setHelp(PARA LA AYUDA DE ESTE COMANDO STRING)
+            ->addArgument(ARGUMENTO O VARIABLE, InputArgument::REQUIRED, LABEL STRING)
+            ->addOption(
+                    NOMBRE DE LA OPCION,
+                    DIMINUTIVO,
+                    InputOption::VALUE_OPTIONAL,
+                    EXPLICACION,
+                    ''
+                );
+    }
+ 
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        AQUI VA TODA LA LOGICA QUE QUIERAS PARA QUE EJECUTE, COMO MIGRACIONES ENTRE OTRAS COSAS
+        $output->writeln(sprintf(MENSAJE O SALIDA (PUEDES USAR %S), (para esto) $input->getArgument('username')));
+        SIEMPRE HAY QUE RETORNAR :)
+        return -1;
+    }
+}

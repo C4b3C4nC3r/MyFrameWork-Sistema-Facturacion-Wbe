@@ -1,0 +1,6 @@
+{
+    "home":"../resources/views/visualizar/HomeView.php",
+    "producto":"../resources/views/visualizar/ProductoView.php",
+    "error404":"../resources/views/errores/error404.php"
+
+}

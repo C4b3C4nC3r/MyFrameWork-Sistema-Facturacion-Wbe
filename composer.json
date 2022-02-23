@@ -1,0 +1,14 @@
+{
+    "require": {
+        "symfony/console": "^5.4",
+        "vlucas/phpdotenv": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Console\\":"resources/src"
+        },
+        "classmap": [
+            "resources/src"
+        ]
+    }
+}

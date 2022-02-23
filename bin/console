@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+
+<?php
+
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+
+use Console\App\Commands\CreateControlAndModelCommand;
+use Console\App\Commands\CreatecontrollerCommand;
+use Console\App\Commands\CreatemodelsCommand;
+//use Console\App\Commands\RunServerPHP;
+
+
+$app = new Application();
+
+//COMANDO ANADIDO
+$app->add(new CreatecontrollerCommand());
+$app->add(new CreatemodelsCommand());
+$app->add(new CreateControlAndModelCommand());
+//$app->add(new RunServerPHP());
+
+//EJECUCUON
+$app->run();

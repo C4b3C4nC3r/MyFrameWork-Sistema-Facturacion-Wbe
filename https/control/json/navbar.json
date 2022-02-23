@@ -1,0 +1,44 @@
+{
+    "navbar01":{
+
+        "0":[
+            {"label":"Nuevo Producto"},
+            {"href":"producto"},
+            {"enabled":"true"},
+            {"elements":null}
+        ],
+        "1":[
+            {"label":"Nuevo Cliente"},
+            {"href":"cliente"},
+            {"enabled":"true"},
+            {"elements":null}
+        ],
+        "2":[
+            {"label":"Factura"},
+            {"href":"cliente"},
+            {"enabled":"true"},
+            {"elements":
+                    {
+                        "0":[
+                            {"label":"Nueva Factura"},
+                            {"href":"factura"},
+                            {"enabled":"true"},
+                            {"elements":null}
+                        ],
+                        "1":[
+                            {"label":"Devolucion Factura"},
+                            {"href":"factura/devolucion"},
+                            {"enabled":"true"},
+                            {"elements":null}
+                        ],
+                        "2":[
+                            {"label":"Suspender Factura"},
+                            {"href":"factura/suspender"},
+                            {"enabled":"true"},
+                            {"elements":null}
+                        ]
+                    }
+            }
+        ]       
+    }
+}
