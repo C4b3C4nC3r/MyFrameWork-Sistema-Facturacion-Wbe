@@ -1,6 +1,10 @@
 <?php
     class Models{
-     
+        /**
+         * 
+         * REQ : COLUMNAS_REQUERIDAS, NOMBRE_TABLA, COLUMNAS_VALORES, FECHA_ELIMINADO
+         * 
+         */
         function __construct() {
      
             $this->conexion = new  Conexion();

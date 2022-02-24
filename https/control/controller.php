@@ -16,17 +16,17 @@ class Controller {
     {
         $datos = Array();
             //estructura iterativa
-            while ($fila = $request->fetch_object()) {
-                $datos [] = array_values((array)$fila);
-            }
+        while ($fila = $request->fetch_object()) {
+            $datos [] = array_values((array)$fila);
+        }
             //para el datatable
-            $resultado = array(
-                "sEcho" => 1,
-                "iTotalRecords"=>count($datos),
-                "iTotalDisplayRecords"=>count($datos),
-                "aaData"=>$datos
-            );
-            echo json_encode($resultado);
+        $resultado = array(
+            "sEcho" => 1,
+            "iTotalRecords"=>count($datos),
+            "iTotalDisplayRecords"=>count($datos),
+            "aaData"=>$datos
+        );
+        return json_encode($resultado);
     }
     
 

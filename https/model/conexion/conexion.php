@@ -5,15 +5,15 @@
 
 class Conexion {
     /*ELEMENTOS PRIVADOS DE LA CLASE */    
-    private $conexion;
-    private $base_datos_alojamiento;
-    private $base_datos_usuario;
-    private $base_datos_clave;
-    private $base_datos_caracteres;
-    private $base_datos_nombre;
+    protected $conexion;
+    protected $base_datos_alojamiento;
+    protected $base_datos_usuario;
+    protected $base_datos_clave;
+    protected $base_datos_caracteres;
+    protected $base_datos_nombre;
     //constructor
     function __construct() {   
-
+        
     }
     //funcion que se conecta a la basede datos y retorna, 
     public function conexionMySqli()
@@ -38,6 +38,25 @@ class Conexion {
         //retornamos la instancia de conexion :)
         return $this->conexion;
     }
+
+    public function conexionPDO()
+    {
+        try{
+
+            $connection = "mysql:host=" . $this->base_datos_alojamiento . ";dbname=" . $this->base_datos_nombre . ";charset=" . $this->base_datos_caracteres;
+            $options = [
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_EMULATE_PREPARES   => false,
+            ];
+            $pdo = new PDO($connection, $this->base_datos_usuario, $this->base_datos_clave, $options);
+ 
+            return $pdo;
+ 
+        }catch(PDOException $e){
+            print_r('Error connection: ' . $e->getMessage());
+        }
+    }
 }
+
 
 ?>

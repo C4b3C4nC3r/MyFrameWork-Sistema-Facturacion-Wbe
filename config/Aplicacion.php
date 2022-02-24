@@ -99,8 +99,10 @@
                     for ($i=2; $i < $len_parametros; $i++) { 
                         array_push($params,$this->explode[$i]);
                     }
+
                     $this->instancia->{$this->explode[1]}($params);
                 } else {
+
                     $this->instancia->{$this->explode[1]}();
                 }                
             } else {

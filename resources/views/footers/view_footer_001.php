@@ -5,6 +5,8 @@
     <!-- Scripts, para la esperincia de usuario -->
     <script src="/js/jquery/jquery.min.js"></script>
     <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/js/datatables.net/jquery.dataTables.min.js"></script>
+
     <script src="/js/aplicacion.js"></script>
 
     <div class="container">

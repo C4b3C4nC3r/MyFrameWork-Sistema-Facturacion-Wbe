@@ -1,6 +1,5 @@
 {
     "navbar01":{
-
         "0":[
             {"label":"Nuevo Producto"},
             {"href":"producto"},
@@ -15,7 +14,7 @@
         ],
         "2":[
             {"label":"Factura"},
-            {"href":"cliente"},
+            {"href":"factura"},
             {"enabled":"true"},
             {"elements":
                     {

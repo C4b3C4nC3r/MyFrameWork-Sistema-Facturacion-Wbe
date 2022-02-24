@@ -17,14 +17,14 @@
         
         function setData()
         {
-            $this->modelo->insertar($_POST);
+            $this->instanciaModelo->insertar($_POST);
         }
         
         function getData()
         {
-            $response = $this->modelo->seleccionar($_POST);
+            $response = $this->instanciaModelo->seleccionar($_POST);
             if(is_object($response)){
-                $this->getDataTable($response);
+                echo $this->getDataTable($response);
             }else{
                 echo $response;
             }
@@ -38,11 +38,11 @@
         
         function setDataUpdate()
         {
-            $this->modelo->actualizar($_POST);
+            $this->instanciaModelo->actualizar($_POST);
         }
         
         function trashData()
         {
-            $this->modelo->eliminar($_POST);
+            $this->instanciaModelo->eliminar($_POST);
         }
     }
