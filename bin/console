@@ -9,6 +9,7 @@ use Symfony\Component\Console\Application;
 
 use Console\App\Commands\CreateControlAndModelCommand;
 use Console\App\Commands\CreatecontrollerCommand;
+use Console\App\Commands\CreatemapsCommand;
 use Console\App\Commands\CreatemodelsCommand;
 //use Console\App\Commands\RunServerPHP;
 
@@ -16,9 +17,10 @@ use Console\App\Commands\CreatemodelsCommand;
 $app = new Application();
 
 //COMANDO ANADIDO
+$app->add(new CreateControlAndModelCommand());
 $app->add(new CreatecontrollerCommand());
 $app->add(new CreatemodelsCommand());
-$app->add(new CreateControlAndModelCommand());
+$app->add(new CreatemapsCommand());
 //$app->add(new RunServerPHP());
 
 //EJECUCUON

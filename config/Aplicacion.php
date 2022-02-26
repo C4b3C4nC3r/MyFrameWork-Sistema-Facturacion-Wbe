@@ -10,6 +10,7 @@
         public $url;
         protected $control;
         protected $model;
+        protected $mapa;
         protected $trim;
         protected $explode;
         protected $instancia;        
@@ -25,6 +26,7 @@
             //buscaran archivos
             $this->setControl(ucfirst($this->getExplode()[0]));
             $this->setModel(ucfirst($this->getExplode()[0]));
+            $this->setMapa(ucfirst($this->getExplode()[0]));
             $this->defectoRuta();
             //echo var_dump($this->getExplode());
             //echo $this->getControl();
@@ -82,6 +84,16 @@
             //retorna el nombre del archivo del modelo
             return $_ENV['DEFAULT_RUTA_MODEL'].$this->model.$_ENV['CONVENCION_MODEL'];
         }
+        //mapa
+        protected function setMapa($newMapa)
+        {
+            $this->mapa = (file_exists($_ENV['DEFAULT_RUTA_MAPA'].$newMapa.$_ENV['CONVENCION_MAPA']))?$newMapa:'Error';
+        }
+        protected function getMapa()
+        {
+            //retorna el nombre del archivo del modelo
+            return $_ENV['DEFAULT_RUTA_MAPA'].$this->mapa.$_ENV['CONVENCION_MAPA'];
+        }
         //funciones
 
         function defectoRuta()
@@ -90,7 +102,7 @@
             require_once $this->getControl();
             $this->instancia = new $controll;
             $this->instancia->getModel($this->getModel(),$this->model."Model");
-            
+            $this->instancia->getMap($this->getMapa(),$this->mapa."Map");
             $len_parametros = sizeof($this->explode);
 
             if ($len_parametros>1) {

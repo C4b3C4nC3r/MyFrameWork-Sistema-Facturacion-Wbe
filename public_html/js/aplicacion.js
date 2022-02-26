@@ -10,8 +10,10 @@ const url = window.location.href
 var object = {};
 
 
-mostrarDatosModelo(true);
 
+function init(){
+    mostrarDatosModelo(true);
+}
 
 
 $("form").on("submit",function(e){
@@ -57,15 +59,33 @@ function enviarParaFuncion(url,request,datostabla){
         }).DataTable();        
     }else{
         $.post(url,request,function(response){
-            console.log(response)
+            //console.log(response)
+            
+            bootbox.alert({
+                title:"Envio Exitoso ",
+                closeButton:false,
+                message:"Ha sido guardado con Exito :)"
+            })
+            $("form").trigger()
         })    
     }
-
 }
 
 
 function mostrarDatosModelo(activador){
     tabla = $("table").attr('tabla')
     funcion = $("table").attr('funcion')
+    
     activador ? enviarParaFuncion(url+funcion,{"nombre_tabla":tabla,"columnas_requeridas":null},true):$("table").hide()   
 }
+
+function darDatos(activador){
+    return true;
+}
+
+function eliminarDato(activador){
+    return true;
+}
+
+
+init()

@@ -7,7 +7,7 @@
     <title>Sistema Web (Facturacion)</title>
     <link rel="stylesheet" href="/scss/style.css">
     <link rel="stylesheet" href="/scss/icons.css">
-
+    <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
     
 </head>
 <body>

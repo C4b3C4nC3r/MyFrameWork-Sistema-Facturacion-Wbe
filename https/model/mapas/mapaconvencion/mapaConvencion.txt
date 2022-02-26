@@ -1,0 +1,45 @@
+<?php
+
+//MAPA DE %sMAP PARA EL USO DEL DATATBLES DINAMICO
+
+class %sMap {
+
+    public $%s_id;
+    public $%s_name;
+    public $%s_col;
+    /**
+    *OTROS ELEMENTOS DEL MAPA
+    **/
+    public $deleted_at;
+    //GETS
+    public function get%s_id(){
+        return $this->%s_id;
+    }
+    public function get%s_name(){
+        return $this->%s_name;
+    }
+    public function get%s_col(){
+        return $this->%s_col;
+    }
+    public function getDeleted_at(){
+        return $this->deleted_at;
+    }
+    //SETS
+    public function set%s_id($setValue){
+        $this->%s_id = $setValue;
+    }
+    public function set%s_name(string $setValue){
+        $this->%s_name = $setValue;
+    }
+    public function set%s_col(string $setValue){
+        $this->%s_col = $setValue;
+    }
+    public function setDeleted_at($setValue){
+        $this->deleted_at = $setValue;
+    }
+    
+
+}
+
+
+?>

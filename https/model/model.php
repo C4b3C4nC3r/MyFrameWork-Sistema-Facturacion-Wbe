@@ -33,7 +33,7 @@
         {
             $sql = "SELECT ";
             $columnas = ($datos['columnas_requeridas'] == null)?'* ':$datos['columnas_requeridas'];
-            $from_where = " FROM ".$datos['nombre_tabla'] ." WHERE ".$datos['nombre_tabla']."id = ".$datos['id'] ;
+            $from_where = " FROM ".$datos['nombre_tabla'] ." WHERE ".$datos['nombre_tabla']."_id = ".$datos['id'] ;
             $sentencia = $sql .$columnas .$from_where;
             return $this->conexion->conexionMysqli()->query($sentencia);
             
@@ -53,6 +53,7 @@
             }
             //terminar (``,``..)            
             $sentencia = $sql .$columnas .$values;
+            echo $sentencia;
             return $this->conexion->conexionMysqli()->query($sentencia);
         
         }
@@ -65,7 +66,7 @@
             for ($i=0; $i <= count($claves)-1 ; $i++) {
                 $set = ($i == count($valores)-1) ? $set." `".$claves[$i]."` = ".$valores[$i] : $set." `".$claves[$i]."` = ".$valores[$i]."," ;
             }
-            $where = " WHERE ".$datos['nombre_tabla']."id = ".$datos['id'];
+            $where = " WHERE ".$datos['nombre_tabla']."_id = ".$datos['id'];
             $sentencia = $sql .$set .$where;
             return $this->conexion->conexionMysqli()->query($sentencia);
 
@@ -73,14 +74,14 @@
         }
         public function sqlEliminarLogicamente(array $datos)
         {
-            $sql = "UPDATE `".$datos['nombre_tabla']."` SET `delete_at` = ".$datos['fecha_eliminado']."WHERE `".$datos['nombre_tabla']."id` = ".$datos['id'];
+            $sql = "UPDATE `".$datos['nombre_tabla']."` SET `deleted_at` = ".$datos['fecha_eliminado']."WHERE `".$datos['nombre_tabla']."_id` = ".$datos['id'];
             $sentencia = $sql;
             return $this->conexion->conexionMysqli()->query($sentencia);
 
         }
         public function sqlEliminarFisicamente(array $datos)
         {
-            $sql = "DELETE FROM ".$datos['nombre_tabla']." WHERE ".$datos['nombre_tabla']."id = ".$datos['id'];
+            $sql = "DELETE FROM ".$datos['nombre_tabla']." WHERE ".$datos['nombre_tabla']."_id = ".$datos['id'];
             $sentencia = $sql;
             return $this->conexion->conexionMysqli()->query($sentencia);
         }

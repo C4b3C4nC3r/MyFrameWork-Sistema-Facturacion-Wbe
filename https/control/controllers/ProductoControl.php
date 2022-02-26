@@ -9,7 +9,7 @@
         function __construct() {
             parent::__construct();
         }
-                
+        
         function getView()
         {
             $this->view->renderView("producto"); 
