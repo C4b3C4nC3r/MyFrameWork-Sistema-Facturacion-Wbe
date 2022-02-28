@@ -48,7 +48,7 @@ class Controller {
     protected function createBtnSelect($valor)
     {
         $btn = "
-            <button class='btn btn-primary' type='button' funcion='/getDataForEdit/".$valor."' pk='".$valor."'>
+            <button onclick='darDatos(true,/getDataForEdit/,".$valor.")' class='btn btn-primary seeData' type='button'>
                 <i class='bi bi-pencil-square'></i>
             </button>
         ";
@@ -58,7 +58,7 @@ class Controller {
     protected function createBtnDelete($valor)
     {
         $btn = "
-            <button class='btn btn-danger' type='button' funcion='/trashData' pk='".$valor."'>
+            <button onclick='eliminarDato(true,/trashData/,".$valor.")' class='btn btn-danger delData' type='button'>
                 <i class='bi bi-trash'></i>
             </button>
         ";

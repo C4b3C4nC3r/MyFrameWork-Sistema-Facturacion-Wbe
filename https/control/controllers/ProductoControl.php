@@ -17,7 +17,9 @@
         
         function setData()
         {
-            $this->instanciaModelo->insertar($_POST);
+        
+            echo ($this->instanciaModelo->insertar($_POST))?true:false;
+            
         }
         
         function getData()
@@ -32,17 +34,18 @@
         
         function getDataForEdit($parametro = null)
         {
-            echo $parametro[0];
-        
+            echo json_encode($this->instanciaModelo->seleccionarPorId($_POST));
         }
         
         function setDataUpdate()
         {
-            $this->instanciaModelo->actualizar($_POST);
+            //nombre_tabla, columna_valores,id
+            echo ($this->instanciaModelo->actualizar($_POST))? true : false;
         }
         
         function trashData()
         {
-            $this->instanciaModelo->eliminar($_POST);
+            //fecha_eliminado, nombre_tabla, id
+            echo ($this->instanciaModelo->eliminar($_POST))?true:false;
         }
     }
