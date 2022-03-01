@@ -32,7 +32,7 @@
                 <label for="product_date_expiration">Fecha de Caducidad</label>
                 </div>
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
-                    <button type="submit" class="btn btn-outline-primary">Agregar</button>
+                    <button type="submit" id="submit" class="btn btn-outline-primary">Agregar</button>
                     <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
                     <button type="button" class="btn btn-outline-indo">Bloquear</button>
                 </div>

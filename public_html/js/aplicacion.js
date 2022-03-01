@@ -9,14 +9,15 @@
 var tabla;
 
 let form =[];
-var validarIsNumber = /^[0-9]+$/;
+var expresionRegular = /^[0-9]+$/;
 const url = window.location.href
 var object = {};
 
 
 
 function init(){
-    mostrarDatosModelo(true);
+    seeDataModel(true);
+
 }
 function getDate(){
     var d = new Date();
@@ -41,12 +42,13 @@ $("form").on("submit",function(e){
         "columnas_valores":object,
         "id":id
     }
-    enviarParaFuncion(url+funcion,request,false,accion)
-    mostrarDatosModelo(true)
+    sendForFunction(url+funcion,request,false,accion)
+    seeDataModel(true)
     $(this).trigger("reset")
+    $("#submit").html("Agregar")
 })
 
-function alertaPost(response,accion){
+function alertBootBoxResponse(response,accion){
     if(response){
         bootbox.alert({
             title:accion+" el Registro",
@@ -62,7 +64,7 @@ function alertaPost(response,accion){
     }
 }
 
-function enviarParaFuncion(url,request,datostabla,accion){
+function sendForFunction(url,request,datostabla,accion){
     
     if (datostabla) {
         tabla = $("#tbllistado").dataTable(
@@ -96,13 +98,13 @@ function enviarParaFuncion(url,request,datostabla,accion){
                 }else{
                     response = true
                 }
-                alertaPost(response,accion);
+                alertBootBoxResponse(response,accion);
             }else{
                 tabla = $("form").attr('tabla')
                 funcion = "/setDataUpdate"
                 accion = "Actualizar"
                 modelo = JSON.parse(response)
-                formArray(modelo,funcion,accion,tabla)
+                setFormArrayResponse(modelo,funcion,accion,tabla)
             }
             
         })    
@@ -110,28 +112,29 @@ function enviarParaFuncion(url,request,datostabla,accion){
 }
 
 
-function formArray(object,funcion,accion,tabla){
+function setFormArrayResponse(object,funcion,accion,tabla){
     for (const key in object) {
-        if(!key.match(validarIsNumber)){
+        if(!key.match(expresionRegular)){
             
             $("input[name="+key+"]").val(object[key])
         }   
     }
     key = tabla+"_id"
     if(!object[key] == ""){
-        $("form").attr("id",object[key])
     }
+        $("form").attr("id",object[key])
+
     $("form").attr("funcion",funcion)
     $("form").attr('accion',accion)
-    
+    $("#submit").html(accion)
 }
 
-function mostrarDatosModelo(activador){
+function seeDataModel(activador){
     tabla = $("table").attr('tabla')
     funcion = $("table").attr('funcion')    
-    activador ? enviarParaFuncion(url+funcion,{"nombre_tabla":tabla,"columnas_requeridas":null},true,"Seleccionar"):$("table").hide()   
+    activador ? sendForFunction(url+funcion,{"nombre_tabla":tabla,"columnas_requeridas":null},true,"Seleccionar"):$("table").hide()   
 }
-
+//fcuinciones de onclick button
 function darDatos(activador,funcion,pk){
     tabla = $("form").attr("tabla")
     if (activador) {
@@ -143,7 +146,7 @@ function darDatos(activador,funcion,pk){
                 message:"Estas seguro de seguir para ver el registro para su edicion?, cierre si no es el caso",
                 callback: (confirm)=>{
                     if (confirm) {
-                        enviarParaFuncion(url+funcion+pk,{"nombre_tabla":tabla,"columnas_requeridas":null,"id":pk},false,"Seleccionar")                        
+                        sendForFunction(url+funcion+pk,{"nombre_tabla":tabla,"columnas_requeridas":null,"id":pk},false,"Seleccionar")                        
                         
                     }            
                 }   
@@ -151,7 +154,7 @@ function darDatos(activador,funcion,pk){
         
     }
 }
-
+//funcinesdesde onclik boton
 function eliminarDato(activador,funcion,pk){
     tabla = $("form").attr("tabla")
     if (activador) {
@@ -163,12 +166,13 @@ function eliminarDato(activador,funcion,pk){
                 message:"Estas seguro de seguir para eliminar el registro para su suspension?, cierre si no es el caso",
                 callback: (confirm)=>{
                     if (confirm) {
-                        enviarParaFuncion(url+funcion,{"nombre_tabla":tabla,"fecha_eliminado":getDate(),"columnas_requeridas":null,"id":pk},false,"Remover")
-                        mostrarDatosModelo(true)                        
+                        sendForFunction(url+funcion,{"nombre_tabla":tabla,"fecha_eliminado":getDate(),"columnas_requeridas":null,"id":pk},false,"Remover")
+                        seeDataModel(true)                        
                     }            
                 }   
             })  
     }
 }
+
 
 init()

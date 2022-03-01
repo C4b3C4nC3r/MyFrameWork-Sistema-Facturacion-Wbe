@@ -106,17 +106,20 @@
             $len_parametros = sizeof($this->explode);
 
             if ($len_parametros>1) {
-                if ($len_parametros>2) {
-                    $params = [];
-                    for ($i=2; $i < $len_parametros; $i++) { 
-                        array_push($params,$this->explode[$i]);
-                    }
-
-                    $this->instancia->{$this->explode[1]}($params);
-                } else {
-
-                    $this->instancia->{$this->explode[1]}();
-                }                
+                if(method_exists($this->instancia,$this->explode[1])){
+                    if ($len_parametros>2) {
+                        $params = [];
+                        for ($i=2; $i < $len_parametros; $i++) { 
+                            array_push($params,$this->explode[$i]);
+                        }
+                        $this->instancia->{$this->explode[1]}($params);
+                    } else {
+                        
+                        $this->instancia->{$this->explode[1]}();
+                    }   
+                }else{
+                    $this->instancia->getView();
+                }
             } else {
                 $this->instancia->getView();
             }
