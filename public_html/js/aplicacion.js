@@ -25,27 +25,36 @@ function getDate(){
 
 }
 
-
-
 $("form").on("submit",function(e){
 
     e.preventDefault();
-    funcion = $(this).attr('funcion')
-    tabla = $(this).attr('tabla')
     accion = $(this).attr('accion')
-    id = $(this).attr("id")
-    
-    formdata = new FormData($(this)[0])
-    formdata.forEach((value, key) => {object[key] = value})
-    request = {
-        "nombre_tabla":tabla,
-        "columnas_valores":object,
-        "id":id
-    }
-    sendForFunction(url+funcion,request,false,accion)
-    seeDataModel(true)
-    $(this).trigger("reset")
-    $("#submit").html("Agregar")
+    //no se que hace si guardar o editar...
+    bootbox.confirm(
+        {
+                title:accion+" este registro?",
+                closeButton:false,
+                message:"Estas seguro de seguir para "+accion+" el registro?, cierre si no es el caso",
+                callback: (confirm)=>{      
+                    if (confirm) {            
+                    funcion = $(this).attr('funcion')
+                    tabla = $(this).attr('tabla')
+                    id = $(this).attr("id")
+                    formdata = new FormData($(this)[0])
+                    formdata.forEach((value, key) => {object[key] = value})
+                    request = {
+                        "nombre_tabla":tabla,
+                        "columnas_valores":object,
+                        "id":id
+                    }
+                    sendForFunction(url+funcion,request,false,accion)
+                    seeDataModel(true)
+                    $(this).trigger("reset")
+                    $("#submit").html("Agregar")
+            }
+                    
+        }   
+    })
 })
 
 function alertBootBoxResponse(response,accion){
@@ -63,6 +72,23 @@ function alertBootBoxResponse(response,accion){
         })
     }
 }
+
+function confirmBootBoxRequest(response) {
+    if(response){
+        bootbox.confirm(
+            {
+                title:"Guarar este registro?",
+                closeButton:false,
+                message:"Estas seguro de seguir para guardar el registro?, cierre si no es el caso",
+                callback: (confirm)=>{
+                    if (confirm) {
+                        return true;
+                    }            
+                }   
+            })
+    }
+}
+
 
 function sendForFunction(url,request,datostabla,accion){
     

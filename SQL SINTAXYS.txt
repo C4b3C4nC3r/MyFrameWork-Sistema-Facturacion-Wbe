@@ -1,0 +1,11 @@
+CREATE TABLE `sistemafacturacion`.`cliente` (
+  `cliente_id` INT NOT NULL AUTO_INCREMENT,
+  `cliente_name` VARCHAR(45) NULL,
+  `cliente_lastname` VARCHAR(45) NULL,
+  `cliente_dni` VARCHAR(13) NULL,
+  `cliente_email` VARCHAR(100) NULL DEFAULT 'unknow@unknow.com',
+  `cliente_telf` VARCHAR(13) NULL DEFAULT '593----------',
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`cliente_id`),
+  UNIQUE INDEX `cliente_dni_UNIQUE` (`cliente_dni` ASC) VISIBLE,
+  UNIQUE INDEX `cliente_id_UNIQUE` (`cliente_id` ASC) VISIBLE);

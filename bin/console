@@ -6,21 +6,21 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
-
-use Console\App\Commands\CreateControlAndModelCommand;
+use Console\App\Commands\CreateAllRecoursesCommand;
 use Console\App\Commands\CreatecontrollerCommand;
 use Console\App\Commands\CreatemapsCommand;
 use Console\App\Commands\CreatemodelsCommand;
+use Console\App\Commands\CreateviewsCommand;
+
 //use Console\App\Commands\RunServerPHP;
-
-
 $app = new Application();
 
 //COMANDO ANADIDO
-$app->add(new CreateControlAndModelCommand());
+$app->add(new CreateAllRecoursesCommand());
 $app->add(new CreatecontrollerCommand());
 $app->add(new CreatemodelsCommand());
 $app->add(new CreatemapsCommand());
+$app->add(new CreateviewsCommand());
 //$app->add(new RunServerPHP());
 
 //EJECUCUON

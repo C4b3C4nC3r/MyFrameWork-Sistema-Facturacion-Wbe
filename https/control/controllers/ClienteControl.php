@@ -1,12 +1,12 @@
 <?php
     /**
     *
-    * CLASSNAME %s
+    * CLASSNAME CLIENTECONTROL
     *
     */
 
 
-    class %s extends %s{
+    class ClienteControl extends Controller{
         
         function __construct() {
             parent::__construct();
@@ -14,7 +14,7 @@
                 
         function getView()
         {
-            $this->view->renderView("%s"); 
+            $this->view->renderView("cliente"); 
         }
         
         function setData()
