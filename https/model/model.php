@@ -38,6 +38,16 @@
             return mysqli_fetch_array($this->conexion->conexionMysqli()->query($sentencia));
             
         }
+
+        public function sqlSeleccionarPorLike(array $datos)
+        {
+            $sql = "SELECT ";
+            $columnas = ($datos['columnas_requeridas'] == null)?' * ':$datos['columnas_requeridas'];
+            $from_where = " FROM ".$datos['nombre_tabla'] ." WHERE `".$datos['por_columna']."` LIKE '%".$datos['busqueda']."%' AND `deleted_at` IS NULL";
+            $sentencia = $sql .$columnas .$from_where;
+            return mysqli_fetch_array($this->conexion->conexionMysqli()->query($sentencia));
+            
+        }
         public function sqlInsertar(array $datos)
         {
             $sql = "INSERT INTO ".$datos['nombre_tabla'];
@@ -77,6 +87,7 @@
         {
             $sql = "UPDATE `".$datos['nombre_tabla']."` SET `deleted_at` = '".$datos['fecha_eliminado']."' WHERE `".$datos['nombre_tabla']."_id` = ".$datos['id'];
             $sentencia = $sql;
+            //echo $sentencia; 
             return $this->conexion->conexionMysqli()->query($sentencia);
 
         }

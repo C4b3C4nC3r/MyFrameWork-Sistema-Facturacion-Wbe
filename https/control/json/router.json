@@ -2,6 +2,7 @@
     "home":"../resources/views/visualizar/HomeView.php",
     "producto":"../resources/views/visualizar/ProductoView.php",
     "cliente":"../resources/views/visualizar/ClienteView.php",
+    "factura":"../resources/views/visualizar/FacturaView.php",
     "error404":"../resources/views/errores/error404.php"
 
 }

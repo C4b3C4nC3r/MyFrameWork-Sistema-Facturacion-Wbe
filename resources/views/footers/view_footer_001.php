@@ -14,6 +14,8 @@
     <script src="/js/datatables.net/buttons.flash.min.js"></script>
     <script src="/js/datatables.net/buttons.colVis.min.js"></script>
     <script src="/js/aplicacion.js"></script>
+    <!-- SOLO USO DE DEVS -->
+    <script src="/js/inputDinamico.js"></script>
 
     <div class="container">
         <!-- Pie de pagina -->

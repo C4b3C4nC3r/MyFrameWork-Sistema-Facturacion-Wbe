@@ -4,7 +4,7 @@
  * 
  * MODEL .PHP
  * REQ : COLUMNAS_REQUERIDAS, NOMBRE_TABLA, COLUMNAS_VALORES, FECHA_ELIMINADO
- * 
+ * NO MOVER NINGUN DE ESTOS SOLOPOR FINES PRACTICAS Y EMJORAS DE CODIGO SI, PERO PARA PRDOUCCCION ES MEJOR NO TOCAR :)
  */
 var tabla;
 
@@ -12,7 +12,6 @@ let form =[];
 var expresionRegular = /^[0-9]+$/;
 const url = window.location.href
 var object = {};
-
 
 
 function init(){
@@ -109,12 +108,12 @@ function sendForFunction(url,request,datostabla,accion){
                         dataType:"json",
                         error:function(e) {
                             console.log(e.responseText);
-                        }
+                        }      
                     },
                 "bDestroy": true,
                 "iDisplayLength":5 ,
                 "order":[[ 0 , "desc" ]]
-        }).DataTable();        
+        }).DataTable();
     }else{
         $.post(url,request,function(response){
             //console.log(response);
@@ -132,7 +131,8 @@ function sendForFunction(url,request,datostabla,accion){
                 modelo = JSON.parse(response)
                 setFormArrayResponse(modelo,funcion,accion,tabla)
             }
-            
+        }).fail(function(e){
+            console.log(e.responseText);
         })    
     }
 }
@@ -182,7 +182,13 @@ function darDatos(activador,funcion,pk){
 }
 //funcinesdesde onclik boton
 function eliminarDato(activador,funcion,pk){
-    tabla = $("form").attr("tabla")
+    formattr = $("form").attr("tabla")
+    tablaattr = $("table").attr("tabla")
+    if(formattr == tablaattr){
+        tabla = formattr;
+    }else{
+        tabla = tablaattr;
+    }
     if (activador) {
         //mostrar un mensaje de confirmacion
         bootbox.confirm(
@@ -199,6 +205,5 @@ function eliminarDato(activador,funcion,pk){
             })  
     }
 }
-
 
 init()

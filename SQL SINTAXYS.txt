@@ -9,3 +9,92 @@ CREATE TABLE `sistemafacturacion`.`cliente` (
   PRIMARY KEY (`cliente_id`),
   UNIQUE INDEX `cliente_dni_UNIQUE` (`cliente_dni` ASC) VISIBLE,
   UNIQUE INDEX `cliente_id_UNIQUE` (`cliente_id` ASC) VISIBLE);
+
+
+
+DATABASE : 
+  Factura {
+    factura_id
+    kf_cliente_id
+    factura_fecha
+    factura_subtotal
+    factura_iva
+    factura_descuento
+    factura_efectivo
+    factura_cambio
+    factura_total
+    deleted_at
+  }
+CREATE TABLE `sistemafacturacion`.`factura` (
+  `factura_id` INT NOT NULL AUTO_INCREMENT,
+  `kf_cliente_id` INT NOT NULL,
+  `factura_fecha` DATETIME NOT NULL,
+  `factura_subtotal` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `factura_iva` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `factura_descuento` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `factura_efectivo` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `factura_cambio` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `factura_total` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`factura_id`),
+  INDEX `fk_cliente_id_idx` (`kf_cliente_id` ASC) VISIBLE,
+  CONSTRAINT `kf_cliente_id`
+    FOREIGN KEY (`kf_cliente_id`)
+    REFERENCES `sistemafacturacion`.`cliente` (`cliente_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+  detalle_factura
+  {
+    detalle_factura_id
+    kf_factura_id
+    kf_producto_id
+    detalle_factura_cantidad
+    detalle_factura_valor_unitario
+    detalle_factura_total
+    deleted_at
+  }
+
+CREATE TABLE `sistemafacturacion`.`detalle_factura` (
+  `detalle_factura_id` INT NOT NULL AUTO_INCREMENT,
+  `kf_factura_id` INT NOT NULL,
+  `kf_producto_id` INT NOT NULL,
+  `detalle_factura_cantidad` INT(5) NOT NULL DEFAULT 0,
+  `detalle_factura_valor_unitario` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `detalle_factura_total` DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`detalle_factura_id`),
+  INDEX `kf_factura_id_idx` (`kf_factura_id` ASC) VISIBLE,
+  INDEX `kf_producto_id_idx` (`kf_producto_id` ASC) VISIBLE,
+  CONSTRAINT `kf_factura_id`
+    FOREIGN KEY (`kf_factura_id`)
+    REFERENCES `sistemafacturacion`.`factura` (`factura_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `kf_producto_id`
+    FOREIGN KEY (`kf_producto_id`)
+    REFERENCES `sistemafacturacion`.`product` (`product_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+  temporal
+  temporal_id
+  temporal_tabla_cantidad
+  temporal_tabla_id
+  temporal_tabla_name
+  kf_usuario_id
+  deleted_at
+
+CREATE TABLE `sistemafacturacion`.`temporal` (
+  `temporal_id` INT NOT NULL,
+  `temporal_cantidad` INT NOT NULL,
+  `temporal_tabla_id` INT NOT NULL,
+  `temporal_tabla_name` VARCHAR(45) NOT NULL,
+  `kf_usuario_id` INT NULL DEFAULT NULL,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`temporal_id`));
+
+
+ALTER TABLE `sistemafacturacion`.`temporal` 
+CHANGE COLUMN `temporal_id` `temporal_id` INT(11) NOT NULL AUTO_INCREMENT ;

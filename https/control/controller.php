@@ -22,14 +22,22 @@ class Controller {
         require $ubic;
         $this->instanciaMapa = new $mapa();
     }
-    public function getDataTable(object $request)
+    public function setMap(string $ubic,string $mapa)
     {
+        require $ubic;
+        return $this->instanciaMapa = new $mapa();
+    }
+
+    public function getDataTable(object $request,object $map = null)
+    {
+
         $elementos = $this->__columnaObject($this->instanciaMapa);
         $elemento = $elementos[0]; //siempre sera el id
-        
+        $this->instanciaMapa = (is_null($map))?$this->instanciaMapa:$map;
         $id = null;
         $datos = Array();
         while ($fila = $request->fetch_object()) {       
+            
             $id = $fila->$elemento;
             $fila->$elemento = $this->createBtnSelect($id);    
             $fila->deleted_at = $this->createBtnDelete($id);

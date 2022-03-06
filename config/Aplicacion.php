@@ -1,5 +1,4 @@
 <?php
-    
 
     /*AQUI ES DONDE VA ARRANZAR UNA CLASE */
     namespace AppInicialization;
@@ -18,9 +17,11 @@
         //constructor
         public function __construct() {
             $this->setUrl((isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : null);
+        
             if(is_null($this->url)){
                 die("Error de Variables del servidor, REQUEST_URI, NO EXISTE");
             }
+        
             $this->setTrim($this->getUrl());
             $this->setExplode((empty($this->getTrim())) ? "home" : $this->getTrim() );
             //buscaran archivos
@@ -36,7 +37,6 @@
         protected function setUrl($newUrl)
         {
             $this->url = $newUrl; 
-            
         }
         protected function getUrl()
         {
@@ -104,7 +104,6 @@
             $this->instancia->getModel($this->getModel(),$this->model."Model");
             $this->instancia->getMap($this->getMapa(),$this->mapa."Map");
             $len_parametros = sizeof($this->explode);
-
             if ($len_parametros>1) {
                 if(method_exists($this->instancia,$this->explode[1])){
                     if ($len_parametros>2) {
