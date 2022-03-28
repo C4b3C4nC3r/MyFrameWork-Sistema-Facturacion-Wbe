@@ -53,6 +53,19 @@ class Controller {
         );
         return json_encode($resultado);
     }
+
+    public function getDivBuscador(object $request,object $map = null)
+    {
+        $datos = Array();
+        while ($fila = $request->fetch_object()) {       
+            
+            $datos [] = array_values((array)$fila);
+        }
+
+        return json_encode($datos);
+    
+    }
+
     protected function createBtnSelect($valor)
     {
         $btn = "

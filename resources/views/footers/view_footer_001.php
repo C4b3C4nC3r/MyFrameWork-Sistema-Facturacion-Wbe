@@ -2,7 +2,7 @@
     
     </body>
 
-    <!-- Scripts, para la esperincia de usuario -->
+    <!-- Scripts, para la experincia de usuario -->
     <script src="/js/jquery/jquery.min.js"></script>
     <script src="/js/bootstrap/bootstrap.min.js"></script>
     <script src="/js/datatables.net/jquery.dataTables.min.js"></script>
@@ -16,7 +16,7 @@
     <script src="/js/aplicacion.js"></script>
     <!-- SOLO USO DE DEVS -->
     <script src="/js/inputDinamico.js"></script>
-
+    <hr>
     <div class="container">
         <!-- Pie de pagina -->
         <footer style="display:flex;justify-content: space-around;">

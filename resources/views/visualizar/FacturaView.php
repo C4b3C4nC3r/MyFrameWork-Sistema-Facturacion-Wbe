@@ -2,7 +2,7 @@
 
     <div class="row gx-5">
         <div class="col">
-            <form  funcion="/setData" tabla="factura" id="0" accion="Registrar">
+            <form funcion="/setData" tabla="factura" id="0" accion="Registrar">
                 <div class="mb-3 text-center">
                     <h4>
                         Nueva Factura <i class="bi bi-cart-plus"></i>
@@ -22,11 +22,19 @@
                 <!-- AQUI EMPIEZAN DOBLE FILA -->
                 <div class="row g-2">
                     <div class="col-md form-floating mb-3">
-                        <input required name="factura_subtotal" disabled type="text" class="form-control" id="factura_subtotal" placeholder="Ej: BigCola peq. de ">
+                        <input required name="factura_subtotal" disabled type="text" class="form-control" id="factura_subtotal" funcion = "/getSubtotal" placeholder="Ej: BigCola peq. de ">
                         <label for="factura_subtotal">SubTotal</label>
                     </div>
                     <div class="col-md form-floating mb-3">
-                        <input required name="factura_iva" type="text" class="form-control" id="factura_iva" placeholder="Ej: BigCola peq. de ">
+                        <select class="form-select" id="iva_porcentaje">
+                            <option value="0">IVA 0%</option>
+                            <option value="12">IVA 12%</option>
+                            <option value="14">IVA 14%</option>
+                        </select>
+                        <label for="floatingSelect">Procentaje Iva</label>
+                    </div>
+                    <div class="col-md form-floating mb-3">
+                        <input required name="factura_iva" disabled type="text" class="form-control" id="factura_iva" placeholder="Ej: BigCola peq. de ">
                         <label for="factura_iva">I.V.A</label>
                     </div>
                 </div>
@@ -80,27 +88,26 @@
                     </div>
                     <div class="modal-body">
                     
-                        <form funcion="/setData" tabla="temporal" id="0" accion="Registrar">
-                            
+                        <form autocomplete="off" funcion="/setData" tabla="temporal" id="0" accion="Registrar">
+
                             <!-- 
                                 INPUTS SECRETOS
                              -->
                                 <input type="hidden" id="temporal_tabla_name" name="temporal_tabla_name" value="product">
                                 <input type="hidden" name="kf_usuario_id" id="kf_usuario_id" value="1">
-
+                                <input type="hidden" name="temporal_tabla_id" id="temporal_tabla_id">
 
                             <div class="form-floating mb-3">
-                                <input required columna="product_name" funcion="/getByLike" name="temporal_tabla_id" type="text" temporal_tabla_id = "" class="form-control" id="temporal_tabla_id" placeholder="Ej: BigCola... ">
-                                <label for="temporal_tabla_id">Producto</label>
+                                <input required columna="product_name" funcion="/getByLike" name="buscar_tabla_id" type="text" class="form-control" id="buscar_tabla_id" placeholder="Ej: BigCola... ">
+                                <label for="buscar_tabla_id">Producto</label>
+                                <ul style="z-index: 2000;position: absolute;" class="list-group responseB">
+                                
+                                </ul>                                
                             </div>
-                            
+                                
                             <div class="form-floating mb-3">
                                 <input required name="temporal_cantidad" type="number" class="form-control" id="temporal_cantidad" placeholder="Ej: 1...10...100 ">
                                 <label for="temporal_cantidad">Cantidad</label>
-                            </div>
-                            <div class="response">
-                                <!-- Va a responder con los datos y habilitara el submit -->
-
                             </div>
 
                             <div class="modal-footer">

@@ -52,6 +52,16 @@
             return $this->sqlSeleccionarPorLike($datos);
         }
 
+        //funcion personalizada
+
+        function seleccionPersonalizada(string $sql)
+        {
+            return $this->sqlPersonal($sql);
+            
+        }
+
+
+
     }
 
 ?>

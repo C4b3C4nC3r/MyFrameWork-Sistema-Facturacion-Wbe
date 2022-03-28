@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/scss/style.css">
     <link rel="stylesheet" href="/scss/icons.css">
     <link rel="stylesheet" href="/css/jquery.dataTables.min.css">
-    
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 

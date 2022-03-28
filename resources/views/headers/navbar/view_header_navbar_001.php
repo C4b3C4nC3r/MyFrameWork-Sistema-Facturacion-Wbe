@@ -15,11 +15,15 @@
      * 
      */
     $navbar = $json['navbar01'];
+    $logo_nocturno = $json['logo-nocturno'];
+
 //    echo var_dump($navbar) 
 ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/home">S-F&copy2020</a>
+            <a class="navbar-brand" href="/home">
+                <img src="<?php echo $logo_nocturno;?>" alt="" width="50" height="44">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                 <span class="navbar-toggler-icon"></span>
             </button>
