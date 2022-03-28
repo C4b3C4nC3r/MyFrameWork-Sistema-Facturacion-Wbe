@@ -12,11 +12,19 @@ let form =[];
 var expresionRegular = /^[0-9]+$/;
 const url = window.location.href
 var object = {};
+//aqui pondras lo inpust que no quieres que vayan al post
+const removeFormData = [
+    "iva_porcentaje",
+    "buscar_tabla_id"
+]
 
+const tableLoadForever=[
+    "temporal"
+]
 
 function init(){
     seeDataModel(true);
-
+    whenTemporalExist();
 }
 function getDate(){
     var d = new Date();
@@ -25,7 +33,7 @@ function getDate(){
 }
 
 $("form").on("submit",function(e){
-
+    object = {};
     e.preventDefault();
     accion = $(this).attr('accion')
     //no se que hace si guardar o editar...
@@ -40,12 +48,20 @@ $("form").on("submit",function(e){
                     tabla = $(this).attr('tabla')
                     id = $(this).attr("id")
                     formdata = new FormData($(this)[0])
-                    formdata.forEach((value, key) => {object[key] = value})
+                    formdata.forEach((value, key) => {        
+                        if(!removeFormData.includes(key)){
+                            object[key] = value
+                            //console.log(key);
+                        }
+                        
+                    })
+                    
                     request = {
                         "nombre_tabla":tabla,
                         "columnas_valores":object,
                         "id":id
                     }
+                    //console.log(request);
                     sendForFunction(url+funcion,request,false,accion)
                     seeDataModel(true)
                     $(this).trigger("reset")
@@ -108,7 +124,7 @@ function sendForFunction(url,request,datostabla,accion){
                         dataType:"json",
                         error:function(e) {
                             console.log(e.responseText);
-                        }      
+                        }     
                     },
                 "bDestroy": true,
                 "iDisplayLength":5 ,
@@ -135,6 +151,8 @@ function sendForFunction(url,request,datostabla,accion){
             console.log(e.responseText);
         })    
     }
+    //funciones de poster
+    whenTemporalExist()
 }
 
 
@@ -146,9 +164,10 @@ function setFormArrayResponse(object,funcion,accion,tabla){
         }   
     }
     key = tabla+"_id"
-    if(!object[key] == ""){
-    }
-        $("form").attr("id",object[key])
+    //if(!object[key] == ""){
+    
+    //}
+    $("form").attr("id",object[key])
 
     $("form").attr("funcion",funcion)
     $("form").attr('accion',accion)
@@ -159,7 +178,11 @@ function seeDataModel(activador){
     tabla = $("table").attr('tabla')
     funcion = $("table").attr('funcion')    
     activador ? sendForFunction(url+funcion,{"nombre_tabla":tabla,"columnas_requeridas":null},true,"Seleccionar"):$("table").hide()   
+    
 }
+
+
+
 //fcuinciones de onclick button
 function darDatos(activador,funcion,pk){
     tabla = $("form").attr("tabla")
@@ -205,5 +228,59 @@ function eliminarDato(activador,funcion,pk){
             })  
     }
 }
+
+
+
+/**
+ * 
+ * FUNCIONES DE DESARROLLADOR :)
+ * 
+ */
+
+function traerSubtotal(){
+    let funcion = $("#factura_subtotal").attr("funcion");
+    let subtotal_det = []
+    let dir = url + funcion;
+    let subtotal = 0;
+
+    $.post(dir,{},(resp)=>{
+    
+        subtotal_det = JSON.parse(resp)
+    
+        subtotal_det.forEach(element => {
+            //console.log(element);
+            subtotal = subtotal+parseFloat(element)
+        });
+        $("#factura_subtotal").val(subtotal);
+    
+        //suma de todos
+    })
+}
+
+
+//console.log(tableLoadForever);
+
+//temporalmente :g
+//traerSubtotal();
+
+function whenTemporalExist(){
+    let getTabla = $("table").attr("tabla");
+
+    if(tableLoadForever.includes(getTabla)){
+        
+        //siempre caragara las funciones necesarias...
+        switch (getTabla) {
+            case "temporal":
+                traerSubtotal();    
+            break;
+            default:
+                bootbox.alert(getTabla)
+            break;
+        }
+        
+    }
+}
+
+
 
 init()
