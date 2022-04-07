@@ -15,7 +15,7 @@
      * 
      */
     $navbar = $json['navbar01'];
-    $logo_nocturno = $json['logo-nocturno'];
+    $logo_nocturno = $json['logo-matutino'];
 
 //    echo var_dump($navbar) 
 ?>

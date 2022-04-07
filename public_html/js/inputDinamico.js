@@ -4,28 +4,30 @@
  * 
  */
 let id = $("#buscar_tabla_id").attr("buscar_tabla_id")
-$(".responseB").hide()
+$(".response").hide()
 
-function busqueda(inputB,tablaB,funcion,columna) {
+
+//creacion d eobejtos y ruta
+function busqueda(inputB,tablaB,funcion,columna,id_response,columnas_requeridas,input) {
     dir = url+funcion
     object = {
         "busqueda":inputB,
         "nombre_tabla":tablaB,
         "por_columna":columna,
-        "columnas_requeridas":"`product_id`,`product_name`,`product_price`"
+        "columnas_requeridas":columnas_requeridas
     }
-    getDataForInput(dir,object)
+    //console.log(object);
+    getDataForInput(dir,object,id_response,input)
 
 }
 
+//bsuqueda e impresion
 
-
-
-function getDataForInput(dir,object) {
+function getDataForInput(dir,object,id_response,input) {
     //console.log(dir);
     $.post(dir,object,function(response) {
         //console.log(response);
-        imprimirLista(response)
+        imprimirLista(response,id_response,input)
     }).fail(function(error){
         alert(error.responseText())
     })
@@ -38,22 +40,60 @@ $("#buscar_tabla_id").on("keyup",function(e){
     let funcion = $("#buscar_tabla_id").attr("funcion")
     let ta = $("#temporal_tabla_name").val()
     let columna = $("#buscar_tabla_id").attr("columna")
-            
-    busqueda(inputB,ta,funcion,columna)
+    let id_response = $("#buscar_tabla_id").attr("idresponse")
+    let columnas_requeridas ="`product_id`,`product_name`,`product_price`";
+    let input = "producto"
+    busqueda(inputB,ta,funcion,columna,id_response,columnas_requeridas,input)
 
 })
+//buscador para cliente
+$("#kf_cliente").on("keyup",function(e){
+    let inputB = $("#kf_cliente").val()
+    let funcion = $("#kf_cliente").attr("funcion")
+    let ta = "cliente"
+    let columna = $("#kf_cliente").attr("columna")
+    let id_response = $("#kf_cliente").attr("idresponse")
+    let input = "cliente";
+    //console.log();  
+    
+    busqueda(inputB,ta,funcion,columna,id_response,"*",input)
 
+})
 $("#iva_porcentaje").on("change",()=>{
+    getDescuento()
+    getIva()
+})
+function getIva(){
+    //primero se hace el descuento..
+    
+    //luego se renderiza el iva
     let iva_porcentaje = $("#iva_porcentaje").val();
     let factura_subtotal = $("#factura_subtotal").val();
     let iva = parseFloat(factura_subtotal)*parseFloat(iva_porcentaje)/100;
     let total = parseFloat(factura_subtotal)+parseFloat(iva);
     //a*b/100
-    $("#factura_iva").val(iva)
-    $("#factura_total").val(total);
+    $("#factura_iva").val(iva.toFixed(2))
+    $("#factura_total").val(total.toFixed(2));
+}
+$("#descuento_porcentaje").on("change",()=>{
+    getDescuento()
+    getIva()
 })
 
-function imprimirLista(respuesta){
+function getDescuento(){
+    let descuento_porcentaje = $("#descuento_porcentaje").val();
+    let factura_subtotal = $("#factura_subtotal").val();
+    let descuento = parseFloat(factura_subtotal)*parseFloat(descuento_porcentaje)/100;
+    let total = parseFloat(factura_subtotal)-parseFloat(descuento);
+    //a*b/100
+    $("#factura_descuento").val(descuento.toFixed(2))
+    $("#factura_total").val(total.toFixed(2));
+    //despues de descuento va el iva
+
+}
+
+//imprirmir en un div
+function imprimirLista(respuesta,id_response,input){
     //console.log(respuesta);
     let template = "" 
     resultado = JSON.parse(respuesta);
@@ -69,15 +109,15 @@ function imprimirLista(respuesta){
             `
                 <li class="list-group-item d-flex justify-content-between align-items-end">
                     ${element[1]}
-                    <button type="button" id="${element[0]}" forInp="${element[1]}" onclick="agregarId(${element[0]})" class="btn btn-primary badge rounded-pill"><i class="bi bi-plus-square-dotted"></i></button>
+                    <button type="button" id="${element[0]}" forInp="${element[1]}" input=${input} onclick="agregarId(${element[0]})" class="btn btn-primary badge rounded-pill"><i class="bi bi-plus-square-dotted"></i></button>
                 </li>
     
             `    
         });
     }
     //cambiamos el contenido
-    $(".responseB").html(template)
-    $(".responseB").show()
+    $(id_response).html(template)
+    $(id_response).show()
  
 
 }
@@ -87,8 +127,23 @@ function agregarId(params) {
     idButton = "#"+params;
     //console.log($(idButton).attr("forInp"));
     //console.log(idButton);
-    $("#temporal_tabla_id").val(params)
-    $("#buscar_tabla_id").val($(idButton).attr("forInp"))
-    $(".responseB").hide()
+    let input = $(idButton).attr("input");
+
+    switch (input) {
+        case "cliente":
+            $("#kf_cliente_id").val(params)
+            $("#kf_cliente").val($(idButton).attr("forInp"))            
+        break;
+        case "producto":
+            $("#temporal_tabla_id").val(params)
+            $("#buscar_tabla_id").val($(idButton).attr("forInp"))
+                
+        break;
+        default:
+            bootbox.alert({title:"Error Busqueda",message:"Error en la Busqueda, intentelo mas tarde :("});
+        break;
+    }
+    $(".response").hide()
 
 }
+

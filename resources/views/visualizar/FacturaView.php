@@ -12,8 +12,12 @@
 
                 <!-- FACTURA_NAME -->
                 <div class="form-floating mb-3">
-                    <input required name="kf_cliente_id" type="text" class="form-control" id="kf_cliente_id" placeholder="Ej: BigCola peq. de ">
-                    <label for="kf_cliente_id">Cliente</label>
+                    <input type="hidden" name="kf_cliente_id">
+                    <input required funcion="/getByLike" columna="cliente_name" idresponse="#responseC" name="kf_cliente" type="text" class="form-control" id="kf_cliente" placeholder="Ej: BigCola peq. de ">
+                    <label for="kf_cliente">Cliente</label>
+                    <ul style="z-index: 2000;position: absolute;" id="responseC" class="list-group response">
+                                
+                    </ul>   
                 </div>
                 <div class="form-floating mb-3">
                     <input required name="factura_fecha" type="datetime-local" class="form-control" id="factura_fecha" placeholder="Ej: BigCola peq. de ">
@@ -25,13 +29,14 @@
                         <input required name="factura_subtotal" disabled type="text" class="form-control" id="factura_subtotal" funcion = "/getSubtotal" placeholder="Ej: BigCola peq. de ">
                         <label for="factura_subtotal">SubTotal</label>
                     </div>
+                    <!-- EL porcentaje del iva debe de ser dinamico asi que en un futuro se tendra en forma de objeto jso, para trabajar mejor en vez de ponerl aqyui :) -->
                     <div class="col-md form-floating mb-3">
                         <select class="form-select" id="iva_porcentaje">
                             <option value="0">IVA 0%</option>
                             <option value="12">IVA 12%</option>
                             <option value="14">IVA 14%</option>
                         </select>
-                        <label for="floatingSelect">Procentaje Iva</label>
+                        <label for="iva_porcentaje">Procentaje Iva</label>
                     </div>
                     <div class="col-md form-floating mb-3">
                         <input required name="factura_iva" disabled type="text" class="form-control" id="factura_iva" placeholder="Ej: BigCola peq. de ">
@@ -43,6 +48,19 @@
                         <input required name="factura_descuento" type="text" class="form-control" id="factura_descuento" placeholder="Ej: BigCola peq. de ">
                         <label for="factura_descuento">Descuento</label>
                     </div>
+                    <!-- SE USARA UNA PETICION POR JQUERY EN EUNA FUNCION QUE TRAIGA LOS DESCUENTOS QUE EXISTAN DENTRODE LOS PRODUCTOS O ALGO POR ESTILO :v -->
+                    <div class="col-md form-floating mb-3">
+                        <select class="form-select" id="descuento_porcentaje">
+                            <option value="0">---Ninguno---</option>
+                            <option value="1">1%</option>
+                            <option value="2">2%</option>
+                            <option value="4">4%</option>
+                            <option value="5">5%</option>
+                            <option value="10">10%</option>
+                        </select>
+                        <label for="descuento_porcentaje">Descuento</label>
+                    </div>
+                    <!-- FIN -->
                     <div class="col-md form-floating mb-3">
                         <input required name="factura_efectivo" type="text" class="form-control" id="factura_efectivo" placeholder="Ej: BigCola peq. de ">
                         <label for="factura_efectivo">Efectivo</label>
@@ -98,9 +116,9 @@
                                 <input type="hidden" name="temporal_tabla_id" id="temporal_tabla_id">
 
                             <div class="form-floating mb-3">
-                                <input required columna="product_name" funcion="/getByLike" name="buscar_tabla_id" type="text" class="form-control" id="buscar_tabla_id" placeholder="Ej: BigCola... ">
+                                <input required columna="product_name" funcion="/getByLike" idresponse="#responseB" name="buscar_tabla_id" type="text" class="form-control" id="buscar_tabla_id" placeholder="Ej: BigCola... ">
                                 <label for="buscar_tabla_id">Producto</label>
-                                <ul style="z-index: 2000;position: absolute;" class="list-group responseB">
+                                <ul style="z-index: 2000;position: absolute;" id="responseB" class="list-group response">
                                 
                                 </ul>                                
                             </div>

@@ -40,5 +40,7 @@
             }
         ]       
     },
-    "logo-nocturno":"/images/sistema-facturacion-publico-logo.jpeg"
+    "logo-nocturno":"/images/sistema-facturacion-publico-logo.jpeg",
+    "logo-matutino":"/images/sistema-facturacion-publico-logo-light.png",
+    "logo-global":"/images/sistema-facturacion-publico-logo.png"
 }
