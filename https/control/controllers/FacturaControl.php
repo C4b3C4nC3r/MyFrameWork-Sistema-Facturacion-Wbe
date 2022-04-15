@@ -37,9 +37,7 @@
             sistemafacturacion.temporal.temporal_cantidad * sistemafacturacion.product.product_price as valor_total
             from sistemafacturacion.product, sistemafacturacion.temporal
             where sistemafacturacion.product.product_id = sistemafacturacion.temporal.temporal_tabla_id
-            and sistemafacturacion.temporal.deleted_at is null;
-            
-            ";
+            and sistemafacturacion.temporal.deleted_at is null;";
             $response = $this->instanciaModelo->seleccionPersonalizada($sql);
             if(is_object($response)){
                 echo $this->getDataTable($response,$map);
@@ -86,6 +84,9 @@
             ";
             echo json_encode(mysqli_fetch_all($this->instanciaModelo->seleccionPersonalizada($sql)));
 
-
         }
+
+        
+        
+
     }
