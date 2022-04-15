@@ -134,7 +134,7 @@ function sendForFunction(url,request,datostabla,accion){
         }).DataTable();
     }else{
         $.post(url,request,function(response){
-            console.log(response);
+            //console.log(response);
             if(response == 1 || response == 0){
                 if (response == 0) {
                     response = false
