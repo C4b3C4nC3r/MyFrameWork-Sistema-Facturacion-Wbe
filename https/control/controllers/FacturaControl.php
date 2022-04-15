@@ -20,7 +20,9 @@
         
         function setData()
         {
+            //al recibir el id de factura :)
             echo ($this->instanciaModelo->insertar($_POST))?true:false;
+            
         }
         
         function getData()

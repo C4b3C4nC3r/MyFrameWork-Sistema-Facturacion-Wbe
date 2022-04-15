@@ -64,21 +64,28 @@ $("#iva_porcentaje").on("change",()=>{
     getIva()
 })
 function getIva(){
-    //primero se hace el descuento..
-    
     //luego se renderiza el iva
     let iva_porcentaje = $("#iva_porcentaje").val();
     let factura_subtotal = $("#factura_subtotal").val();
+    //primero se hace el descuento..
+    if($("#factura_descuento").val() != 0){
+        factura_subtotal = factura_subtotal - $("#factura_descuento").val()
+    }
     let iva = parseFloat(factura_subtotal)*parseFloat(iva_porcentaje)/100;
     let total = parseFloat(factura_subtotal)+parseFloat(iva);
     //a*b/100
-    $("#factura_iva").val(iva.toFixed(2))
+    $("#factura_iva").val(redondearDecimal(iva))
     $("#factura_total").val(total.toFixed(2));
+
 }
 $("#descuento_porcentaje").on("change",()=>{
     getDescuento()
     getIva()
 })
+
+function redondearDecimal(number){
+    return Math.round((number + Number.EPSILON) * 100) / 100
+}
 
 function getDescuento(){
     let descuento_porcentaje = $("#descuento_porcentaje").val();
@@ -86,7 +93,7 @@ function getDescuento(){
     let descuento = parseFloat(factura_subtotal)*parseFloat(descuento_porcentaje)/100;
     let total = parseFloat(factura_subtotal)-parseFloat(descuento);
     //a*b/100
-    $("#factura_descuento").val(descuento.toFixed(2))
+    $("#factura_descuento").val(redondearDecimal(descuento))
     $("#factura_total").val(total.toFixed(2));
     //despues de descuento va el iva
 
@@ -147,3 +154,10 @@ function agregarId(params) {
 
 }
 
+$("#factura_efectivo").on("keyup",function(){
+    let factura_efectivo = $("#factura_efectivo").val();
+    let factura_total = $("#factura_total").val();
+    let cambio = factura_total < factura_efectivo ?factura_total - factura_efectivo:0;
+    let factura_cambio = cambio<0?cambio*-1:cambio;
+    $("#factura_cambio").val(redondearDecimal(factura_cambio))
+})

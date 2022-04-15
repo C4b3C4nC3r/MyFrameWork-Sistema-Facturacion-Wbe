@@ -15,7 +15,9 @@ var object = {};
 //aqui pondras lo inpust que no quieres que vayan al post
 const removeFormData = [
     "iva_porcentaje",
-    "buscar_tabla_id"
+    "buscar_tabla_id",
+    "descuento_porcentaje",
+    "kf_cliente"
 ]
 
 const tableLoadForever=[
@@ -44,18 +46,18 @@ $("form").on("submit",function(e){
                 message:"Estas seguro de seguir para "+accion+" el registro?, cierre si no es el caso",
                 callback: (confirm)=>{      
                     if (confirm) {            
-                    funcion = $(this).attr('funcion')
-                    tabla = $(this).attr('tabla')
-                    id = $(this).attr("id")
-                    formdata = new FormData($(this)[0])
-                    formdata.forEach((value, key) => {        
-                        if(!removeFormData.includes(key)){
-                            object[key] = value
-                            //console.log(key);
-                        }
+                        funcion = $(this).attr('funcion')
+                        tabla = $(this).attr('tabla')
+                        id = $(this).attr("id")
+                        formdata = new FormData($(this)[0])
+                        formdata.forEach((value, key) => {        
+                            if(!removeFormData.includes(key)){
+                                object[key] = value
+                                //console.log(key);
+                            }
+                            
+                        })
                         
-                    })
-                    
                     request = {
                         "nombre_tabla":tabla,
                         "columnas_valores":object,
@@ -132,7 +134,7 @@ function sendForFunction(url,request,datostabla,accion){
         }).DataTable();
     }else{
         $.post(url,request,function(response){
-            //console.log(response);
+            console.log(response);
             if(response == 1 || response == 0){
                 if (response == 0) {
                     response = false

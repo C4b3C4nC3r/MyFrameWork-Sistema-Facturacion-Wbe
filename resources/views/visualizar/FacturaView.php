@@ -12,7 +12,7 @@
 
                 <!-- FACTURA_NAME -->
                 <div class="form-floating mb-3">
-                    <input type="hidden" name="kf_cliente_id">
+                    <input type="hidden" name="kf_cliente_id" id="kf_cliente_id">
                     <input required funcion="/getByLike" columna="cliente_name" idresponse="#responseC" name="kf_cliente" type="text" class="form-control" id="kf_cliente" placeholder="Ej: BigCola peq. de ">
                     <label for="kf_cliente">Cliente</label>
                     <ul style="z-index: 2000;position: absolute;" id="responseC" class="list-group response">
@@ -25,8 +25,8 @@
                 </div>
                 <!-- AQUI EMPIEZAN DOBLE FILA -->
                 <div class="row g-2">
-                    <div class="col-md form-floating mb-3">
-                        <input required name="factura_subtotal" disabled type="text" class="form-control" id="factura_subtotal" funcion = "/getSubtotal" placeholder="Ej: BigCola peq. de ">
+                    <div class="col-md form-floating mb-3 ">
+                        <input required name="factura_subtotal" readonly  type="text" class="form-control" id="factura_subtotal" funcion = "/getSubtotal" placeholder="Ej: BigCola peq. de ">
                         <label for="factura_subtotal">SubTotal</label>
                     </div>
                     <!-- EL porcentaje del iva debe de ser dinamico asi que en un futuro se tendra en forma de objeto jso, para trabajar mejor en vez de ponerl aqyui :) -->
@@ -39,13 +39,13 @@
                         <label for="iva_porcentaje">Procentaje Iva</label>
                     </div>
                     <div class="col-md form-floating mb-3">
-                        <input required name="factura_iva" disabled type="text" class="form-control" id="factura_iva" placeholder="Ej: BigCola peq. de ">
+                        <input required name="factura_iva" readonly type="text" class="form-control" id="factura_iva" placeholder="Ej: BigCola peq. de ">
                         <label for="factura_iva">I.V.A</label>
                     </div>
                 </div>
                 <div class="row g-2">
                     <div class="col-md form-floating mb-3">
-                        <input required name="factura_descuento" type="text" class="form-control" id="factura_descuento" placeholder="Ej: BigCola peq. de ">
+                        <input required readonly name="factura_descuento" type="text" class="form-control" id="factura_descuento" placeholder="Ej: BigCola peq. de ">
                         <label for="factura_descuento">Descuento</label>
                     </div>
                     <!-- SE USARA UNA PETICION POR JQUERY EN EUNA FUNCION QUE TRAIGA LOS DESCUENTOS QUE EXISTAN DENTRODE LOS PRODUCTOS O ALGO POR ESTILO :v -->
@@ -67,11 +67,11 @@
                     </div>
                 </div>
                 <div class="form-floating mb-3">
-                    <input required name="factura_cambio" disabled type="text" class="form-control" id="factura_cambio" placeholder="Ej: BigCola peq. de ">
+                    <input required name="factura_cambio" readonly type="text" class="form-control" id="factura_cambio" placeholder="Ej: BigCola peq. de ">
                     <label for="factura_cambio">Cambio</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input required name="factura_total" disabled type="text" class="form-control" id="factura_total" placeholder="Ej: BigCola peq. de ">
+                    <input required name="factura_total" readonly type="text" class="form-control" id="factura_total" placeholder="Ej: BigCola peq. de ">
                     <label for="factura_total">Total A Pagar</label>
                 </div>
                 <!--BUTTONS-->
