@@ -86,7 +86,60 @@
 
         }
 
-        
+
+        /**
+         * 
+         * Funcones personzalizadas
+         * 
+         * DEVOLUCION -> VISTA
+         * DEVOLUCIONDATA->REGISTROS->(SEE, FECHA, CLIENTE,TOTAL,DEVOLUCION)
+         * * SUSPENDER -> VISTA
+         * SUSPENDERDATA->REGISTROS->(SEE, FECHA, CLIENTE,TOTAL,SUSPENCION)
+         * 
+         */
+
+        public function devolucion()
+        {
+            $this->view->renderView("factura-devolucion"); 
+            
+        }
+        public function suspender()
+        {
+            $this->view->renderView("factura-devolucion"); 
+            
+        }
+
+        function devolucionData(){
+            
+            $sql = "select factura.factura_id,factura.factura_fecha,factura.kf_cliente_id,factura_total from factura;";
+            $map = (object)["factura_id"=>null,"factura_fecha"=>null,"kf_cliente_id"=>null,"factura_total"=>null];
+ 
+            $response = $this->instanciaModelo->seleccionPersonalizada($sql);
+            
+            
+            if(is_object($response)){
+                echo $this->getDataTable($response,$map,"show&unabled");
+            }else{
+                echo $response;
+            }
+            
+        }
+
+        function suspenderData(){
+            
+            //$response = $this->instanciaModelo->seleccionPersonalizada($_POST);
+            $sql = "select factura.factura_id,factura.factura_fecha,factura.kf_cliente_id,factura_total from factura;";
+            $map = (object)["factura_id"=>null,"factura_fecha"=>null,"kf_cliente_id"=>null,"factura_total"=>null];
+ 
+            $response = $this->instanciaModelo->seleccionPersonalizada($sql);
+            
+            if(is_object($response)){
+                echo $this->getDataTable($response,$map,"show&unabled");
+            }else{
+                echo $response;
+            }
+            
+        }
         
 
     }
