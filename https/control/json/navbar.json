@@ -25,14 +25,8 @@
                             {"elements":null}
                         ],
                         "1":[
-                            {"label":"Devolucion Factura"},
-                            {"href":"/factura/devolucion"},
-                            {"enabled":"true"},
-                            {"elements":null}
-                        ],
-                        "2":[
-                            {"label":"Suspender Factura"},
-                            {"href":"/factura/suspender"},
+                            {"label":"Historial"},
+                            {"href":"/factura/registros"},
                             {"enabled":"true"},
                             {"elements":null}
                         ]

@@ -38,32 +38,42 @@ class Controller {
         while ($fila = $request->fetch_object()) {       
             
             $id = $fila->$elemento;
-            $fila->$elemento = $this->createBtnSelect($id);    
-            $fila->deleted_at = $this->createBtnDelete($id);
-
             if(!is_null($btn)){
                 //por medio del casos, vamos a llenar el objeto
                 switch ($btn) {
                     case 'show&unabled':
                         $fila->$elemento = $this->seeBtnView($id);    
-                        $fila->deleted_at = $this->changeBtnStatus($id);
+                        $fila->deleted_at = is_null($fila->deleted_at)?$this->changeBtnStatus($id):$this->rechangeBtnStatus($id);
                     break;
                     case 'show&select&unabled':
                         $fila->$elemento = $this->seeBtnView($id);    
-                        $fila->$elemento = $this->createBtnSelect($id);    
-                        $fila->deleted_at = $this->changeBtnStatus($id);
+                        ///$fila->$elemento = $this->createBtnSelect($id);    
+                        $fila->deleted_at = is_null($fila->deleted_at)?$this->changeBtnStatus($id):$this->rechangeBtnStatus($id);
                     break;
                     case 'show':
                         $fila->$elemento = $this->seeBtnView($id);    
                     break;
+                    case 'unabled':
+                        $fila->$elemento = is_null($fila->deleted_at)?$this->changeBtnStatus($id):$this->rechangeBtnStatus($id);
+                    break;
                     case 'deleted':
-                        $fila->deleted_at = $this->createBtnDelete($id);
+                        $fila->$elemento = $this->createBtnDelete($id);
+                    break;
+                    case 'edit':
+                        $fila->$elemento = $this->editBtn($id);    
+                    break;
+                    case 'none':
+                        
                     break;
                     default:
                         $fila->$elemento = $this->createBtnSelect($id);    
                         $fila->deleted_at = $this->createBtnDelete($id);
                     break;
                 }
+            }else{
+                $fila->$elemento = $this->createBtnSelect($id);    
+                $fila->deleted_at = $this->createBtnDelete($id);
+        
             }
 
 
@@ -120,8 +130,20 @@ class Controller {
     protected function seeBtnView($valor)
     {
         $btn = "
-            <button onclick='mostrarDatos(true,/getDataDetalle/,".$valor.")' class='btn btn-primary showData' type='button'>
+            <button onclick='mostrarDatos(true,/detalle/,".$valor.")' class='btn btn-primary showData' type='button'>
                 <i class='bi bi-list-check'></i>
+            </button>
+        ";
+
+        return $btn;
+    
+    }
+
+    protected function rechangeBtnStatus($valor)
+    {
+        $btn = "
+            <button onclick='cambiarEstado(true,/untrash/,".$valor.")' class='btn btn-success enabledData' type='button'>
+                <i class='bi bi-hand-thumbs-up'></i>
             </button>
         ";
 
@@ -130,13 +152,24 @@ class Controller {
     protected function changeBtnStatus($valor)
     {
         $btn = "
-            <button onclick='cambiarEstado(true,/trashData/,".$valor.")' class='btn btn-danger disaData' type='button'>
+            <button onclick='cambiarEstado(true,/trash/,".$valor.")' class='btn btn-danger disaData' type='button'>
                 <i class='bi bi-hand-thumbs-down'></i>
             </button>
         ";
 
         return $btn;
     }
+    protected function editBtn($valor)
+    {
+        $btn = "
+            <button onclick='editarRegistros(true,/changed/,".$valor.")' class='btn btn-primary disaData' type='button'>
+                <i class='bi bi-pencil-square'></i>
+            </button>
+        ";
+
+        return $btn;
+    }
+
 
 }
 

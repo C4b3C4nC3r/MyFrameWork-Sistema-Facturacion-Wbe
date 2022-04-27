@@ -202,7 +202,6 @@ function darDatos(activador,funcion,pk){
                     }            
                 }   
             })
-        
     }
 }
 //funcinesdesde onclik boton
@@ -231,8 +230,90 @@ function eliminarDato(activador,funcion,pk){
     }
 }
 
+//funcinesdesde onclik boton
+function cambiarEstado(activador,funcion,pk){
+    formattr = $("form").attr("tabla")
+    tablaattr = $("table").attr("tabla")
+    if(formattr == tablaattr){
+        tabla = formattr;
+    }else{
+        tabla = tablaattr;
+    }
+    if (activador) {
+        //mostrar un mensaje de confirmacion
+        bootbox.confirm(
+            {
+                title:"Suspender este registro?",
+                closeButton:false,
+                message:"Estas seguro de seguir para dar de baja el registro para su suspension?, cierre si no es el caso",
+                callback: (confirm)=>{
+                    if (confirm) {
+                        //String(funcion).replace("/","")
+                    }            
+                }   
+            })  
+    }
+}
 
 
+function mostrarDatos(activador,funcion,pk) {
+    formattr = $("form").attr("tabla")
+    tablaattr = $("table").attr("tabla")
+    if(formattr == tablaattr){
+        tabla = formattr;
+    }else{
+        tabla = tablaattr;
+    }
+    if (activador) {
+        //mostrar un mensaje de confirmacion
+        bootbox.confirm(
+            {
+                title:"Revisar el Contenido?",
+                closeButton:false,
+                message:"Estas seguro de seguir para vizualizar el registro?, cierre si no es el caso",
+                callback: (confirm)=>{
+                    if (confirm) {
+                        //String(funcion).replace("/","")
+                        funcion = String(funcion).replace("/","")
+                                                    //dar un datatable
+                            $("#tabladetallemodal").dataTable(
+                                {
+                                    "aProcessing": true,
+                                    "aServerSide": true,
+                                    dom: "Bfrtip",
+                                    buttons: [
+                                        
+                                    ],
+                                    "ajax":
+                                        {
+                                            data:{"kf_factura_id":pk},
+                                            url:url+funcion,
+                                            type: "POST",
+                                            dataType:"json",
+                                            error:function(e) {
+                                                console.log(e.responseText);
+                                            }     
+                                        },
+                                    "bDestroy": true,
+                                    "iDisplayLength":5 ,
+                                    "order":[[ 0 , "desc" ]]
+                            }).DataTable();
+
+                            var MyModal = new bootstrap.Modal(document.getElementById("tabladetalle"),{
+                                keyboard: false
+                              }
+                            )
+                            MyModal.show()
+                        } 
+                }   
+            })  
+    }
+}
+
+function editarRegistros (activador,funcion,pk){
+    //print
+    console.log("Indicar que cantidad de producto se devolvio?");
+}
 /**
  * 
  * FUNCIONES DE DESARROLLADOR :)

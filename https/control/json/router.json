@@ -3,8 +3,7 @@
     "producto":"../resources/views/visualizar/ProductoView.php",
     "cliente":"../resources/views/visualizar/ClienteView.php",
     "factura":"../resources/views/visualizar/FacturaView.php",
-    "factura-devolucion":"../resources/views/visualizar/DetalleFacturaView.php",
-    "factura-suspender":"../resources/views/visualizar/DetalleFacturaView.php.php",
+    "factura-registro":"../resources/views/visualizar/DetalleFacturaView.php",
     "error404":"../resources/views/errores/error404.php"
 
 }
