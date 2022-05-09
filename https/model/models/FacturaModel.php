@@ -111,7 +111,9 @@
             
         }
 
-
+        function reutilizarRegistro(Array $datos){
+            return $this->sqlRestaurarLogicamente($datos);
+        }
 
     }
 

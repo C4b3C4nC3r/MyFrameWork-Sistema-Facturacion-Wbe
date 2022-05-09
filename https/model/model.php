@@ -124,6 +124,15 @@
             return $this->conexion->conexionMysqli()->query($sql);
             
         }
+        public function sqlRestaurarLogicamente(array $datos)
+        {
+            $sql = "UPDATE `".$datos['nombre_tabla']."` SET `deleted_at` = NULL WHERE `".$datos['nombre_tabla']."_id` = ".$datos['id'];
+            $sentencia = $sql;
+            //echo $sentencia; 
+            return $this->conexion->conexionMysqli()->query($sentencia);
+
+        }
+
     }
 
 

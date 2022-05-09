@@ -240,15 +240,37 @@ function cambiarEstado(activador,funcion,pk){
         tabla = tablaattr;
     }
     if (activador) {
+        colvalue = {}
+        action = "No Definida"
         //mostrar un mensaje de confirmacion
         bootbox.confirm(
             {
-                title:"Suspender este registro?",
+                title:"Cambiar Estado?",
                 closeButton:false,
-                message:"Estas seguro de seguir para dar de baja el registro para su suspension?, cierre si no es el caso",
+                message:"Estas seguro de cambiar de estado este registro?, cierre si no es el caso",
                 callback: (confirm)=>{
                     if (confirm) {
-                        //String(funcion).replace("/","")
+
+
+                        funcion = String(funcion).replace("/","")
+                        request = null
+                        //casos
+                        
+                        switch (funcion) {
+                            case "trash/":
+                                request ={"id":pk,"fecha_eliminado":getDate(),"nombre_tabla":tabla}
+                                action = "Suspender"
+                                break;
+                            case "untrash/":
+                                request ={"id":pk,"nombre_tabla":tabla}                                
+                                action = "Reactivar"
+                                break;
+                        
+                            default:
+                                break;
+                        }
+                        sendForFunction(url+funcion,request,false,action)                        
+                        seeDataModel(true)
                     }            
                 }   
             })  

@@ -51,9 +51,9 @@
             echo json_encode($this->instanciaModelo->seleccionarPorId($_POST));
         }
         
-        function setDataUpdate()
+        function setDataUpdate($post = null)
         {
-            echo ($this->instanciaModelo->actualizar($_POST))? true : false;
+            echo ($this->instanciaModelo->actualizar(is_null($post)?$_POST:$post))?true:false;
         }
         
         function trashData($post = null)
@@ -106,7 +106,7 @@
 
         function registrosData(){
             
-            $sql = "select factura.factura_id,factura.factura_fecha,concat(cliente.cliente_lastname,' ',cliente.cliente_name) kf_cliente_id,factura_total from factura,cliente
+            $sql = "select factura.factura_id,factura.factura_fecha,concat(cliente.cliente_lastname,' ',cliente.cliente_name) kf_cliente_id,factura_total,factura.deleted_at from factura,cliente
             where factura.kf_cliente_id = cliente.cliente_id;";
             $map = (object)["factura_id"=>null,"factura_fecha"=>null,"kf_cliente_id"=>null,"factura_total"=>null];
  
@@ -137,7 +137,10 @@
 
         public function registrostrash()
         {
-            //$this->trashData();
-            echo "eliminado";
+            echo $this->trashData($_POST);
+        }
+        public function registrosuntrash()
+        {
+            echo $this->instanciaModelo->reutilizarRegistro($_POST);
         }
     }
