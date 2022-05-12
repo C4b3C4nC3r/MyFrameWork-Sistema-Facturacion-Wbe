@@ -8,6 +8,7 @@ class Controller {
     function __construct() {
         //vista instancia    
         $this->view = new View();
+        
     } 
     //model
     public function getModel(string $ubic,string $modelo)
@@ -170,6 +171,21 @@ class Controller {
         return $btn;
     }
 
+    //session user
+
+    public function getSessionUser(object $user)
+    {
+        session_start();
+        $_SESSION["user"] = $user;
+        $condicion = false;
+        $this->view->user = $user;
+
+        if(!is_null($this->view->user)){
+            $condicion = true;
+        }
+
+        return $condicion;
+    }
 
 }
 

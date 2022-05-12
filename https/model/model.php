@@ -19,6 +19,24 @@
             return $this->conexion->conexionMysqli()->query($sentencia);
             
         }
+        public function sqlSeleccionarPorWhere(array $datos)
+        {
+            $sql = "SELECT ";
+            //$columnas = ($datos['columnas_requeridas'] == null)?'* ':$datos['columnas_requeridas'];
+            $from = "* FROM ".$datos['nombre_tabla'];
+            $where = " WHERE ";
+            $claves = array_keys($datos['columnas_valores']); //hace un array de llaves
+            $valores = array_values($datos['columnas_valores']); //hace un array de valores
+            
+            //WHERE $claves[0] = '$valores[0]' AND.
+            for ($i=0; $i <= count($claves)-1 ; $i++) {
+                $where = $where." ".$claves[$i]." = '".$valores[$i]."' AND ";
+            }
+            $where = $where. "deleted_at IS NULL";
+            $sentencia = $sql .$from . $where;
+            return $this->conexion->conexionMysqli()->query($sentencia);
+            //return $sentencia;
+        }
         public function sqlSeleccionarTodo(array $datos)
         {
             $sql = "SELECT ";

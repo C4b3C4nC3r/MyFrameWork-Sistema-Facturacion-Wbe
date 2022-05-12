@@ -2,7 +2,7 @@
 
     <div class="row gx-5">
         <div class="col">
-            <form funcion="/setData" tabla="factura" id="0" accion="Registrar">
+            <form funcion="/factura/setData" tabla="factura" id="0" accion="Registrar">
                 <div class="mb-3 text-center">
                     <h4>
                         Nueva Factura <i class="bi bi-cart-plus"></i>
@@ -19,10 +19,15 @@
                                 
                     </ul>   
                 </div>
+
+                <!-- 
+                INNECESARIO
                 <div class="form-floating mb-3">
                     <input required name="factura_fecha" type="datetime-local" class="form-control" id="factura_fecha" placeholder="Ej: BigCola peq. de ">
                     <label for="factura_fecha">Fecha</label>
                 </div>
+                 -->
+
                 <!-- AQUI EMPIEZAN DOBLE FILA -->
                 <div class="row g-2">
                     <div class="col-md form-floating mb-3 ">
@@ -106,7 +111,7 @@
                     </div>
                     <div class="modal-body">
                     
-                        <form autocomplete="off" funcion="/setData" tabla="temporal" id="0" accion="Registrar">
+                        <form autocomplete="off" funcion="factura/setData" tabla="temporal" id="0" accion="Registrar">
 
                             <!-- 
                                 INPUTS SECRETOS

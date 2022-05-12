@@ -37,18 +37,18 @@
                         $label =null;
                         $enabled = null;
                         $elements = null;
-
+                        $funcion = null;
                         foreach ($navbar as $key => $item) {
                             $label = $item[0]["label"];
                             $href = $item[1]["href"];
                             $enabled = $item[2]["enabled"];
                             $elements = $item[3]["elements"];
-
+                            $funcion = $item[4]["funcion"];
                             if(is_null($elements)):
 
                                 ?>
                                     <li class="nav-item">
-                                        <a class="nav-link" aria-current="page" href="<?php echo $href;?>"><?php echo $label;?></a>
+                                        <a class="nav-link" <?php echo $funcion;?> aria-current="page" href="<?php echo $href;?>"><?php echo $label;?></a>
                                     </li>
                                 <?php
                             else:
@@ -84,8 +84,13 @@
 
                         //fin
                     ?>
-
+                    <li class="nav-item response">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </li>
                 </ul>
+                
             </div>
         </div>
     </nav>

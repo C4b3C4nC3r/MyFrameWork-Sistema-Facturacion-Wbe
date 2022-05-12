@@ -20,6 +20,12 @@
         
         function setData()
         {
+
+            //formato 2022-04-14 20:20:00
+            if($_POST["nombre_tabla"] == "factura"){
+                $_POST["columnas_valores"]["factura_fecha"] = date("Y-m-d H-i-s");
+            }
+            //echo json_encode($_POST);
             //al recibir el id de factura :)
             echo ($this->instanciaModelo->insertar($_POST))?true:false;
             

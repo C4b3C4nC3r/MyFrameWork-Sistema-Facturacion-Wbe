@@ -12,10 +12,11 @@
         protected $mapa;
         protected $trim;
         protected $explode;
-        protected $instancia;        
-        
+        protected $instancia;     
         //constructor
         public function __construct() {
+
+
             $this->setUrl((isset($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : null);
         
             if(is_null($this->url)){

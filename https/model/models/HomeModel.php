@@ -1,12 +1,14 @@
 <?php
-class HomeModel{
+class HomeModel extends Models{
     function __construct() {
-        
+        parent::__construct();
     }
-    public function hello()
+
+    public function consultarUsuario(array $datos)
     {
-        echo "hello<br>";
+        return $this->sqlSeleccionarPorWhere($datos);
     }
+
 }
 
 

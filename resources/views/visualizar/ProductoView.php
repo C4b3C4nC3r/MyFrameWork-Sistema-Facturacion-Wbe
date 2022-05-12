@@ -2,7 +2,7 @@
 
     <div class="row gx-5">
         <div class="col">
-            <form funcion="/setData" tabla="product" id="0" accion="Registrar">
+            <form funcion="producto/setData" tabla="product" id="0" accion="Registrar">
                 <div class="mb-3 text-center">
                     <h4>
                         Nuevo Producto <i class="bi bi-cart-plus"></i>

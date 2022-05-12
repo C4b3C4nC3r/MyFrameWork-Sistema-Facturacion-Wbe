@@ -10,7 +10,7 @@ var tabla;
 
 let form =[];
 var expresionRegular = /^[0-9]+$/;
-const url = window.location.href
+const url = window.location.href //casos estaticos
 var object = {};
 //aqui pondras lo inpust que no quieres que vayan al post
 const removeFormData = [
@@ -19,6 +19,7 @@ const removeFormData = [
     "descuento_porcentaje",
     "kf_cliente"
 ]
+
 
 const tableLoadForever=[
     "temporal"
@@ -64,7 +65,8 @@ $("form").on("submit",function(e){
                         "id":id
                     }
                     //console.log(request);
-                    sendForFunction(url+funcion,request,false,accion)
+                    //console.log(funcion);
+                    sendForFunction(funcion,request,false,accion)
                     seeDataModel(true)
                     $(this).trigger("reset")
                     $("#submit").html("Agregar")
@@ -135,20 +137,9 @@ function sendForFunction(url,request,datostabla,accion){
     }else{
         $.post(url,request,function(response){
             //console.log(response);
-            if(response == 1 || response == 0){
-                if (response == 0) {
-                    response = false
-                }else{
-                    response = true
-                }
-                alertBootBoxResponse(response,accion);
-            }else{
-                tabla = $("form").attr('tabla')
-                funcion = "/setDataUpdate"
-                accion = "Actualizar"
-                modelo = JSON.parse(response)
-                setFormArrayResponse(modelo,funcion,accion,tabla)
-            }
+            //alertBootBoxResponse(response,accion);
+            casesResponse(response,accion)
+            
         }).fail(function(e){
             console.log(e.responseText);
         })    
@@ -387,5 +378,58 @@ function whenTemporalExist(){
 }
 
 
+function advertir(ruta){
+
+    bootbox.confirm({
+        title:"Salir de tu Cuenta",
+        message:"Estas seguro de salir de tu cuenta?",
+        closeButton:false,
+        callback:(confirm)=>{
+            if(confirm){
+                $(".response").show();
+                setTimeout (()=>{
+                    window.location= ruta;
+                },2000)
+                
+            }
+        }
+    })
+}
+
+
+function casesResponse(response,accion){
+    //console.log(typeof(response));
+    //console.log(response);
+    response = JSON.parse(response);
+    
+    switch (response) {
+        case 0:
+            response = false
+            alertBootBoxResponse(response,accion);
+            break;
+        case 1:
+            response = true
+            alertBootBoxResponse(response,accion);
+            break;
+        case 2:
+            $("#form").hide();
+            $(".response").show();
+            setTimeout (()=>{
+                window.location="/home";
+            },2000);
+            break;
+        
+        default:
+            tabla = $("form").attr('tabla')
+            funcion = "/setDataUpdate"
+            accion = "Actualizar"
+            modelo = response
+            setFormArrayResponse(modelo,url+funcion,accion,tabla)
+            break;
+
+        
+        
+    }
+}
 
 init()

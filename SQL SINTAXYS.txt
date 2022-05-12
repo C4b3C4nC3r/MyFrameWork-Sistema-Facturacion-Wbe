@@ -98,3 +98,13 @@ CREATE TABLE `sistemafacturacion`.`temporal` (
 
 ALTER TABLE `sistemafacturacion`.`temporal` 
 CHANGE COLUMN `temporal_id` `temporal_id` INT(11) NOT NULL AUTO_INCREMENT ;
+
+CREATE TABLE `sistemafacturacion`.`usuario` (
+  `usuario_id` INT NOT NULL AUTO_INCREMENT,
+  `usuario_name` VARCHAR(45) NOT NULL,
+  `usuario_password` VARCHAR(45) NOT NULL,
+  `usuario_titulo` VARCHAR(45) NOT NULL,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`usuario_id`),
+  UNIQUE INDEX `usuario_id_UNIQUE` (`usuario_id` ASC) VISIBLE,
+  UNIQUE INDEX `usuario_name_UNIQUE` (`usuario_name` ASC) VISIBLE);

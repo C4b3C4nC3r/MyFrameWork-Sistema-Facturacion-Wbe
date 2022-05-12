@@ -4,13 +4,15 @@
             {"label":"Nuevo Producto"},
             {"href":"/producto"},
             {"enabled":"true"},
-            {"elements":null}
+            {"elements":null},
+            {"funcion":null}
         ],
         "1":[
             {"label":"Nuevo Cliente"},
             {"href":"/cliente"},
             {"enabled":"true"},
-            {"elements":null}
+            {"elements":null},
+            {"funcion":null}
         ],
         "2":[
             {"label":"Factura"},
@@ -22,17 +24,31 @@
                             {"label":"Nueva Factura"},
                             {"href":"/factura"},
                             {"enabled":"true"},
-                            {"elements":null}
+                            {"elements":null},
+                            {"funcion":null}
+
                         ],
                         "1":[
                             {"label":"Historial"},
                             {"href":"/factura/registros"},
                             {"enabled":"true"},
-                            {"elements":null}
+                            {"elements":null},
+                            {"funcion":null}
+
                         ]
                     }
-            }
-        ]       
+            },
+            {"funcion":null}
+
+        ],
+        "3":[
+            {"label":"Cerrar Cuenta"},
+            {"href":"#"},
+            {"enabled":"true"},
+            {"elements":null},
+            {"funcion":"onclick=advertir('/home/destroysession')"}
+
+        ]  
     },
     "logo-nocturno":"/images/sistema-facturacion-publico-logo.jpeg",
     "logo-matutino":"/images/sistema-facturacion-publico-logo-light.png",
