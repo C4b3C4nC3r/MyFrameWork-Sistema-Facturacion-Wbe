@@ -170,15 +170,20 @@ function setFormArrayResponse(object,funcion,accion,tabla){
 function seeDataModel(activador){
     tabla = $("table").attr('tabla')
     funcion = $("table").attr('funcion')    
-    activador ? sendForFunction(url+funcion,{"nombre_tabla":tabla,"columnas_requeridas":null},true,"Seleccionar"):$("table").hide()   
-    
+    columnas_requeridas = $("table").attr("col") == null ? null : $("table").attr("col")
+    activador ? sendForFunction(url+funcion,{"nombre_tabla":tabla,"columnas_requeridas":columnas_requeridas},true,"Seleccionar"):$("table").hide()   
+    tabla = null
+    funcion =null
+    columnas_requeridas = null
 }
 
 
-
+//mejorar la funcion uwu
 //fcuinciones de onclick button
 function darDatos(activador,funcion,pk){
     tabla = $("form").attr("tabla")
+    //console.log(funcion);
+    //console.log(tabla);
     if (activador) {
         //mostrar un mensaje de confirmacion
         bootbox.confirm(

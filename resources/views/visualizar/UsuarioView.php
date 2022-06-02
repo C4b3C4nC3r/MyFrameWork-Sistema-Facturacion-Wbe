@@ -14,8 +14,14 @@
                 <!-- USUARIO_NAME -->
                 <div class="form-floating mb-3">
                 <input required name="usuario_name" type="text" class="form-control" id="usuario_name" placeholder="Ej: BigCola peq. de ">
-                <label for="usuario_name">--LABEL--</label>
+                <label for="usuario_name">Nombre Usuario</label>
                 </div>
+               <!-- USUARIO_TITULO -->
+                <div class="form-floating mb-3">
+                <input required name="usuario_titulo" type="text" class="form-control" id="usuario_titulo" placeholder="Ej: BigCola peq. de ">
+                <label for="usuario_titulo">Titulo Usuario</label>
+                </div>
+                <!-- PASSWORD IS DEFAULT USERNAME+YEARS+NAME_SYSTEM -->
                 <!--BUTTONS-->
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                     <button type="submit" id="submit" class="btn btn-outline-primary">Agregar</button>
@@ -35,13 +41,11 @@
             </div>  
             <!-- Tabla -->
             <div class="table-responsive">
-                <table class="table" id="tbllistado" tabla="usuario" funcion="/getData">
+                <table class="table" col="usuario_id,usuario_name, usuario_titulo,deleted_at" id="tbllistado" tabla="usuario" funcion="/getData">
                     <thead>
                         <th>Editar</th>
                         <th>Usuario</th>
-                        <th>COL</th>
-                        <th>COL</th>
-                        <th>COL</th>
+                        <th>Titulo</th>
                         <th>Eliminar</th>
                     </thead>          
                     <tbody>

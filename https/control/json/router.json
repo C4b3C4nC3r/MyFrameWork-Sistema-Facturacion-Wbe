@@ -4,6 +4,7 @@
     "cliente":"../resources/views/visualizar/ClienteView.php",
     "factura":"../resources/views/visualizar/FacturaView.php",
     "factura-registro":"../resources/views/visualizar/DetalleFacturaView.php",
+    "usuario":"../resources/views/visualizar/UsuarioView.php",
     "error404":"../resources/views/errores/error404.php"
 
 }

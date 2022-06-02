@@ -35,7 +35,7 @@
             </div>  
             <!-- Tabla -->
             <div class="table-responsive">
-                <table class="table" id="tbllistado" tabla="%s" funcion="/getData">
+                <table class="table" id="tbllistado" tabla="%s" col="" funcion="/getData">
                     <thead>
                         <th>Editar</th>
                         <th>%s</th>
